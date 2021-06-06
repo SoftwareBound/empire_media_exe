@@ -1,0 +1,10 @@
+.timestamp_container {
+  margin-top: 5em;
+  margin-left: 1em;
+  display: inline-flex;
+  margin-bottom: 1em;
+}
+
+.timestamp_btn {
+  width: max-content;
+}

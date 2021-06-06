@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import Timestamps from "./Timestamps";
+import Chart from "./Chart";
+import { useSelector, useDispatch } from "react-redux";
+import { getDataByTimestamp } from "./redux/actions/timestampActions";
+import React, { useEffect } from "react";
+import { timeFigure, timeWords } from "./common/titles/timestamp";
 
-function App() {
+const App = () => {
+  const data = useSelector((state) => state.timestampReducer);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!data.length) {
+      dispatch(getDataByTimestamp(timeFigure.FIVE, timeWords.MINUTES));
+    }
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Timestamps />
+      <Chart stockData={data} />
     </div>
   );
-}
+};
 
 export default App;
